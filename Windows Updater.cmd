@@ -17,6 +17,11 @@ if exist "%windir%\system32\UsoClient.exe" (
   )
 )
 
+where /q powershell.exe >nul 2>&1
+if %ERRORLEVEL%==0 (
+  powershell -NoProfile -Command "if not (Get-Module -ListAvailable -Name PSWindowsUpdate) { Install-PackageProvider -Name NuGet -Force -Confirm:$false; Install-Module -Name PSWindowsUpdate -Force -Confirm:$false }; Import-Module PSWindowsUpdate; Install-WindowsUpdate -AcceptAll -IgnoreReboot -Verbose"
+)
+
 where /q winget.exe >nul 2>&1
 if %ERRORLEVEL%==0 (
   winget upgrade --all --accept-package-agreements --accept-source-agreements --force
