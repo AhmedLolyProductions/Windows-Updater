@@ -36,6 +36,13 @@ if !ERRORLEVEL!==0 (
   winget upgrade --all --include-unknown --include-pinned --force --accept-package-agreements --accept-source-agreements
 )
 
+"%windir%\system32\UsoClient.exe" ScanInstallWait >nul 2>&1
+
+where /q powershell.exe >nul 2>&1
+if !ERRORLEVEL!==0 (
+  powershell -NoProfile -Command "$ErrorActionPreference='SilentlyContinue'; $session = New-Object -ComObject Microsoft.Update.Session; $searcher = $session.CreateUpdateSearcher(); $result = $searcher.Search('IsInstalled=0 and Type=''Software'''); $updates = $result.Updates; if ($updates.Count -gt 0) { $downloader = $session.CreateUpdateDownloader(); $downloader.Updates = $updates; $downloader.Download(); $installer = New-Object -ComObject Microsoft.Update.Installer(); $installer.Updates = $updates; $installer.Install() }"
+)
+
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\CI\Policy\VerifiedAndReputablePolicyState" /v Enabled >nul 2>&1 && echo Driver Signature Enforcement is enabled
 reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableLUA >nul 2>&1 && echo UAC is enabled
 
