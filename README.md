@@ -5,4 +5,4 @@
 > - There's a network issue
 
 > [!IMPORTANT]
-> This is AI-generated content, I do not know how to code `Batchfile`
+> This is AI-generated content, I do not know how to code `PowerShell`
