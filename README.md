@@ -1,3 +1,6 @@
+> [!WARNING]
+> Do NOT run the script! For some reason it corrupted my PC! I'm working on a fix
+
 > [!NOTE]
 > If the script closes or gets errors:
 > - Finished updating
