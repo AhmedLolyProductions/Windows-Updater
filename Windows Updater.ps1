@@ -1,4 +1,3 @@
-Start-Process powershell.exe -ArgumentList "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "`"$PSCommandPath`"" -Verb RunAs; exit
 & "$env:windir\system32\UsoClient.exe" StartScan
 Get-Service wuauserv -ErrorAction SilentlyContinue | Start-Service -ErrorAction SilentlyContinue
 Install-PackageProvider -Name NuGet -Force -ErrorAction SilentlyContinue
